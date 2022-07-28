@@ -43,13 +43,13 @@ def animation(form, delta, eqt, var, clicked_grid):
     # initialising figure and the things we want to plot
     fig = plt.figure()
     if Dcoord1 == -1 and Dcoord2 == -1:
-        contour_0, = plt.plot([], [],".", color='b')
-        contour, = plt.plot([], [],".", color='b')
+        contour_0, = plt.plot([], [],".", color='k')
+        contour, = plt.plot([], [],".", color='k')
     else:
-        contour, = plt.plot([], [], color='b')
-        contour_0, = plt.plot([], [], color='b')
-    grid, = plt.plot([], [], color='k')
-    grid_0, = plt.plot([], [], color='k')
+        contour, = plt.plot([], [], color='k)
+        contour_0, = plt.plot([], [], color='k)
+    grid, = plt.plot([], [], color='b)
+    grid_0, = plt.plot([], [], color='b)
 
     # defining the animation function
     def animate(i):
