@@ -121,6 +121,8 @@ def rectangle(xc, yc, l, h, f):  # center (xc,yc) l the length on x, h the hight
 
 # an ellypse centered on (0,0)
 def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number of points
+    a = int(a)
+    b = int(a)
     X = []
     Y = []
     angle=0
@@ -131,6 +133,8 @@ def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number
     return X,Y
 
 def ellypse(xc, yc, a,b, Np):  # center (xc,yc)
+    xc = int(xc)
+    yc = int(yc)
     X, Y = ellypse_0(a,b,Np)
     Lp = []
     for i in range(Np+1):
