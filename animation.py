@@ -53,7 +53,7 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
 
     # defining the animation function
     def animate(i):
-        t = 5 * i * 0.1
+        t = i
 
         x1 = transform_x1(X1, X2, 0, t)
         x2 = transform_x2(X1, X2, 0, t)
@@ -73,7 +73,7 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
 
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames=1000, blit=False, interval=5, repeat=True)
+    ani = mplani.FuncAnimation(fig, animate, frames=(np.arange(0.0, 1000, 0.1), blit=False, interval=10, repeat=False)
     plt.show()
     # closes those wierd windows that jump out every second time
     # if you have any idea how to fix that, please do it, I did all I could
