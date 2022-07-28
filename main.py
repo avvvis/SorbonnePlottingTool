@@ -6,6 +6,7 @@ import animation as ani
 class GUI:
     def __init__(self):
         self.master = tk.Tk()
+        self.ahelp = 0
         master = self.master
         # data needed for centering windows
         self.screen_width = master.winfo_screenwidth()
@@ -236,10 +237,10 @@ class GUI:
         checked = self.clicked_grid
         if figure == "rectangle":
             ani.animation(rectangle(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
-                                    self.entry_height.get(), 100), 40, self.eqt, self.var, checked)
+                                    self.entry_height.get(), 100), 40, self.eqt, self.var, checked, self.ahelp)
         if figure == "ellipse":
             ani.animation(ellipse(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
-                                  self.entry_height.get(), 100), 40, self.eqt, self.var, checked)
+                                  self.entry_height.get(), 100), 40, self.eqt, self.var, checked, self.ahelp)
 
         elif figure == "custom":
             # getting data from input (lop = list of points)
@@ -254,7 +255,7 @@ class GUI:
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
             # running animation
-            ani.animation(custom(lop, 100), 50, self.eqt, self.var, checked)
+            ani.animation(custom(lop, 100), 50, self.eqt, self.var, checked, self.ahelp)
         elif figure == "scatterpoints":
             # getting data from input (lop = list of points)
             str_lop = self.text_points.get("1.0", tk.END)
@@ -268,8 +269,8 @@ class GUI:
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
             # running animation
-            ani.animation(scatterpoints(lop), 50, self.eqt, self.var, checked)
-            
+            ani.animation(scatterpoints(lop), 50, self.eqt, self.var, checked, self.ahelp)
+        self.ahelp += 1
             
     def equation_window(self):
         self.build_new_window(400, 300, "Input Equation")
