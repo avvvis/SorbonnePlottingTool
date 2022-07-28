@@ -1,7 +1,6 @@
 # locally defined function to draw geometric 2D forms
 from form_functions import *
-
-#external modules and libraries
+# external modules and libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as mplani
@@ -9,7 +8,7 @@ import matplotlib.animation as mplani
 
 # an animation of a specified form (see form_functions)
 # delta = plot window size (from (0-delta, 0-delta) to (0+delta, 0+delta))
-def animation(form, delta, eqt, var):
+def animation(form, delta, eqt, var, clicked_grid):
     # create variables from input
     if '__builtins__' in var:
         del var['__builtins__']
@@ -34,10 +33,10 @@ def animation(form, delta, eqt, var):
         return eval(eqt['y'], v)
 
     X1, X2, Dcoord1, Dcoord2 = np.array(form[0]), np.array(form[1]), form[2], form[3]
-    
+
     # enables plotting or not plotting the Grid
     if clicked_grid.get() == True:
-        Xg, Yg = plot_mgrid(Dcoord1,Dcoord2,100)
+        Xg, Yg = plot_mgrid(Dcoord1, Dcoord2, 100)
     elif clicked_grid.get() == False:
         Xg, Yg = np.nan, np.nan
 
@@ -47,21 +46,21 @@ def animation(form, delta, eqt, var):
     contour_0, = plt.plot([], [], color='b')
 
     grid, = plt.plot([], [], color='k')
-    grid_0, = plt.plot([],[], color='k')
+    grid_0, = plt.plot([], [], color='k')
 
     # defining the animation function
     def animate(i):
-        t = 5*i * 0.1
+        t = 5 * i * 0.1
 
         x1 = transform_x1(X1, X2, 0, t)
         x2 = transform_x2(X1, X2, 0, t)
         contour.set_data(x1, x2)
         contour_0.set_data(X1, X2)
 
-        xg1 = transform_x1(Xg,Yg,0,t)
-        xg2 = transform_x2(Xg,Yg,0,t)
+        xg1 = transform_x1(Xg, Yg, 0, t)
+        xg2 = transform_x2(Xg, Yg, 0, t)
         grid.set_data(xg1, xg2)
-        grid_0.set_data(Xg,Yg)
+        grid_0.set_data(Xg, Yg)
 
         # setting parameters of the plot
         plt.grid("--")
@@ -73,5 +72,4 @@ def animation(form, delta, eqt, var):
 
     ani = mplani.FuncAnimation(fig, animate, frames=1000, blit=False, interval=5, repeat=True)
     plt.show()
-
 
