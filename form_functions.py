@@ -18,7 +18,7 @@ def ligne(p1,p2,f):
 
 # draws a custom figure, connecting each point in the list in the list order (warning: connects Lp[-1] with Lp[0])
 def custom(Lp,f):
-    print(Lp, type(Lp))
+    #print(Lp, type(Lp))
     # the coordinates of all points of the figure
     X=[]
     Y=[]
@@ -31,16 +31,16 @@ def custom(Lp,f):
     for i in range (len(Lp)):
         # choosing the two points
         p1 = Lp[i]
-        p1[0] = int(p1[0])
-        p1[1] = int(p1[1])
+        p1[0] = float(p1[0])
+        p1[1] = float(p1[1])
         if i+1 == len(Lp):
             p2 = Lp[0]
-            p2[0] = int(p2[0])
-            p2[1] = int(p2[1])
+            p2[0] = float(p2[0])
+            p2[1] = float(p2[1])
         else:
             p2 = Lp[i+1]
-            p2[0] = int(p2[0])
-            p2[1] = int(p2[1])
+            p2[0] = float(p2[0])
+            p2[1] = float(p2[1])
         # fundaments of the grid
         if (p1[0]-p2[0]) == 0:  # special case for xp1 == xp2
             Dcoord2[p1[1]] = [p1[0],p2[0]]
@@ -109,10 +109,10 @@ def triangle(p1,p2,p3,f):
 
 
 def rectangle(xc, yc, l, h, f):  # center (xc,yc) l the length on x, h the highth on y
-    xc = int(xc)
-    yc = int(yc)
-    l = int(l)
-    h = int(h)
+    xc = float(xc)
+    yc = float(yc)
+    l = float(l)
+    h = float(h)
     p1 = [xc - 1/2*l, yc - 1/2*h]
     p2 = [p1[0] + l, p1[1]]
     p3 = [p2[0], p2[1] + h]
@@ -121,8 +121,8 @@ def rectangle(xc, yc, l, h, f):  # center (xc,yc) l the length on x, h the hight
 
 # an ellypse centered on (0,0)
 def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number of points
-    a = int(a)
-    b = int(a)
+    a = float(a)
+    b = float(a)
     X = []
     Y = []
     angle=0
@@ -133,8 +133,8 @@ def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number
     return X,Y
 
 def ellypse(xc, yc, a,b, Np):  # center (xc,yc)
-    xc = int(xc)
-    yc = int(yc)
+    xc = float(xc)
+    yc = float(yc)
     X, Y = ellypse_0(a,b,Np)
     Lp = []
     for i in range(Np+1):
