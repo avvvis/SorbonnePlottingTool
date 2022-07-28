@@ -67,8 +67,8 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
 
         # setting parameters of the plot
         plt.grid("--")
-        plt.xlim(-delta, delta)
-        plt.ylim(-delta, delta)
+        plt.xlim(min(x1), max(x1))
+        plt.ylim(min(x2), max(x2))
         plt.axis("scaled")
 
         return contour_0, contour, grid_0, grid,
