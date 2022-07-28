@@ -34,7 +34,12 @@ def animation(form, delta, eqt, var):
         return eval(eqt['y'], v)
 
     X1, X2, Dcoord1, Dcoord2 = np.array(form[0]), np.array(form[1]), form[2], form[3]
-    Xg, Yg = plot_mgrid(Dcoord1, Dcoord2, 100)
+    
+    # enables plotting or not plotting the Grid
+    if clicked_grid.get() == True:
+        Xg, Yg = plot_mgrid(Dcoord1,Dcoord2,100)
+    elif clicked_grid.get() == False:
+        Xg, Yg = np.nan, np.nan
 
     # initialising figure and the things we want to plot
     fig = plt.figure()
