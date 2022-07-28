@@ -8,7 +8,7 @@ import matplotlib.animation as mplani
 
 # an animation of a specified form (see form_functions)
 # delta = plot window size (from (0-delta, 0-delta) to (0+delta, 0+delta))
-def animation(form, delta, eqt, var, clicked_grid):
+def animation(form, delta, eqt, var, clicked_grid, ahelp):
     # create variables from input
     if '__builtins__' in var:
         del var['__builtins__']
@@ -75,4 +75,7 @@ def animation(form, delta, eqt, var, clicked_grid):
 
     ani = mplani.FuncAnimation(fig, animate, frames=1000, blit=False, interval=5, repeat=True)
     plt.show()
-
+    # closes those wierd windows that jump out every second time
+    # if you have any idea how to fix that, please do it, I did all I could
+    if ahelp % 2 == 0:
+        plt.close('all')
