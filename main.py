@@ -113,6 +113,11 @@ class GUI:
                                   command=self.custom_data_window)
         button_custom.grid(row=3, column=0, columnspan=2, sticky='W')
 
+        button_scatterpoints = tk.Button(self.master, text="scatterpoints", width=20,
+                                  command=self.scatterpoints_data_window)
+        button_scatterpoints.grid(row=4, column=0, columnspan=2, sticky='W')
+        
+        
         self.clicked_grid = tk.BooleanVar()
         checkbox_grid = tk.Checkbutton(self.master, text='Grid: ', variable=self.clicked_grid, onvalue=True,
                                        offvalue=False)
@@ -145,6 +150,30 @@ class GUI:
 
         self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("custom"))
+        self.button_plot_points.grid(row=6, column=0, columnspan=2)
+
+        # adding focus and shortcuts
+        self.master.lift()
+        self.master.focus_force()
+        self.text_points.focus_set()
+
+        self.text_points.bind("<Shift-Return>", lambda event: self.button_plot_points.focus_set())
+        self.text_points.bind("<Shift-Down>", lambda event: self.button_plot_points.focus_set())
+        self.button_plot_points.bind("<Up>", lambda event: self.text_points.focus_set())
+        self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
+
+    def scatterpoints_data_window(self):
+        self.build_new_window(250, 550, "Input points :")
+
+        input_label = tk.Label(self.master, text="Input points")
+        input_label.grid(row=0, column=0, sticky='w')
+
+        self.text_points = tk.Text(self.master, height=30, width=30)
+        self.text_points.grid(row=1, column=0, sticky='w', rowspan=5, columnspan=2)
+        self.text_points.insert(tk.END, "points=[]")
+
+        self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
+                                            command=lambda: self.plot_figure("scatterpoints"))
         self.button_plot_points.grid(row=6, column=0, columnspan=2)
 
         # adding focus and shortcuts
@@ -224,10 +253,24 @@ class GUI:
             # data after strip = x1,y1,x2,y2...xn,yn
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
-
             # running animation
             ani.animation(custom(lop, 100), 50, self.eqt, self.var, checked)
-
+        elif figure == "scatterpoints":
+            # getting data from input (lop = list of points)
+            str_lop = self.text_points.get("1.0", tk.END)
+            str_lop = str_lop.split("=")[1]
+            # changing string into list
+            # note that you have to use specific formula for list to work [x1, y1], [x2, y2], ... [xn, yn]
+            str_lop = str_lop.replace(" ", '').replace("\n", '').replace("[", '').replace("]", '')
+            str_lop = str_lop.split(",")
+            lop = []
+            # data after strip = x1,y1,x2,y2...xn,yn
+            for i in range(0, len(str_lop), 2):
+                lop.append([float(str_lop[i]), float(str_lop[i + 1])])
+            # running animation
+            ani.animation(scatterpoints(lop), 50, self.eqt, self.var, checked)
+            
+            
     def equation_window(self):
         self.build_new_window(400, 300, "Input Equation")
 
