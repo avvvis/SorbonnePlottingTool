@@ -120,7 +120,7 @@ def rectangle(xc, yc, l, h, f):  # center (xc,yc) l the length on x, h the hight
     return custom([p1,p2,p3,p4], f)
 
 # an ellypse centered on (0,0)
-def ellypse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number of points
+def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number of points
     X = []
     Y = []
     angle=0
