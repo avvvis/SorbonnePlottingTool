@@ -51,6 +51,51 @@ class GUI:
         button2D.bind('<Return>', lambda event: button2D.invoke())
         button3D.bind('<Up>', lambda event: button2D.focus_set())
         button3D.bind('<Return>', lambda event: button3D.invoke())
+        
+        def ellypse_data_window(self):
+            self.build_new_window(300, 150, "Input data")
+
+            input_label = tk.Label(self.master, text="Input data:")
+            input_label.grid(row=0, column=0, sticky='W')
+
+            label_x_center = tk.Label(self.master, text="center point x coord :", width=20)
+            label_x_center.grid(row=1, column=0, columnspan=1, sticky='E')
+            self.entry_x_center = tk.Entry(self.master, width=20)
+            self.entry_x_center.grid(row=1, column=1)
+
+            label_y_center = tk.Label(self.master, text="center point x coord :", width=20)
+            label_y_center.grid(row=2, column=0, columnspan=1, sticky='W')
+            self.entry_y_center = tk.Entry(self.master, width=20)
+            self.entry_y_center.grid(row=2, column=1)
+
+            label_length = tk.Label(self.master, text="a/semi-major axis :", width=20)
+            label_length.grid(row=3, column=0, sticky='w')
+            self.entry_length = tk.Entry(self.master)
+            self.entry_length.grid(row=3, column=1)
+
+            label_height = tk.Label(self.master, text="b/semi-minor axis :", width=20)
+            label_height.grid(row=4, column=0, sticky='w')
+            self.entry_height = tk.Entry(self.master)
+            self.entry_height.grid(row=4, column=1)
+
+            button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("ellypse"))
+            button_next.grid(row=5, column=0, columnspan=2)
+
+            # adding feature of jumping between windows with arrows
+            self.master.lift()
+            self.master.focus_force()
+            self.entry_x_center.focus_set()
+
+            self.entry_x_center.bind('<Down>', lambda event: self.entry_y_center.focus_set())
+            self.entry_y_center.bind('<Up>', lambda event: self.entry_x_center.focus_set())
+            self.entry_y_center.bind('<Down>', lambda event: self.entry_length.focus_set())
+            self.entry_length.bind('<Up>', lambda event: self.entry_y_center.focus_set())
+            self.entry_length.bind('<Down>', lambda event: self.entry_height.focus_set())
+            self.entry_height.bind('<Up>', lambda event: self.entry_length.focus_set())
+            self.entry_height.bind('<Down>', lambda event: button_next.focus_set())
+            button_next.bind('<Up>', lambda event: self.entry_height.focus_set())
+            button_next.bind('<Return>', lambda event: button_next.invoke())
+
 
     def choose2d(self):
         self.build_new_window(150, 125, "choose figure")
@@ -69,6 +114,10 @@ class GUI:
         button_custom = tk.Button(self.master, text="custom", width=20,
                                   command=self.custom_data_window)
         button_custom.grid(row=3, column=0, columnspan=2, sticky='W')
+        
+        self.clicked_grid = tk.BooleanVar()
+        checkbox_grid = tk.Checkbutton(self.master, text='Grid: ', variable=self.clicked_grid, onvalue=True,offvalue=False)
+        checkbox_grid.grid(row=5, column=0, columnspan=2, sticky='w')
 
         # these lines allow to focus on button in new window
         self.master.lift()
@@ -153,14 +202,17 @@ class GUI:
         self.entry_height.bind('<Up>', lambda event: self.entry_length.focus_set())
         self.entry_height.bind('<Down>', lambda event: button_next.focus_set())
         button_next.bind('<Up>', lambda event: self.entry_height.focus_set())
-        button_next.bind('<Return>', lambda event: button_next.invoke())
-
+        button_next.bind('<Return>', lambda event: button_next.invoke()
+     
     def plot_figure(self, figure):
+        checked = self.clicked_grid
         if figure == "rectangle":
             ani.animation(rectangle(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
-                                    self.entry_height.get(), 100), 40, self.eqt, self.var)
-        elif figure == "ellipse":
-            pass
+                                    self.entry_height.get(), 100), 40, self.eqt, self.var, checked)
+        if figure == "ellypse":
+            ani.animation(ellypse(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
+                                    self.entry_height.get(), 100), 40, self.eqt, self.var,checked)
+            
         elif figure == "custom":
             # getting data from input (lop = list of points)
             str_lop = self.text_points.get("1.0", tk.END)
