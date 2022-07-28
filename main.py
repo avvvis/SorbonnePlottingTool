@@ -223,7 +223,7 @@ class GUI:
             lop = []
             # data after strip = x1,y1,x2,y2...xn,yn
             for i in range(0, len(str_lop), 2):
-                lop.append([int(str_lop[i]), int(str_lop[i + 1])])
+                lop.append([float(str_lop[i]), float(str_lop[i + 1])])
 
             # running animation
             ani.animation(custom(lop, 100), 50, self.eqt, self.var, checked)
