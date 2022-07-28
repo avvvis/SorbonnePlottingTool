@@ -146,7 +146,18 @@ def ellypse(xc, yc, a,b, Np):  # center (xc,yc)
 
     return custom(Lp,1) # the purpose of passing it through custom is to create the grid
 
+def scatterpoints(Lp):
+    X=[]
+    Y=[]
+    Dcoord = -1
+    Dcoord2 = -1
 
+    for i in range (len(Lp)):
+        X.append(Lp[i][0])
+        X.append(np.nan)
+        Y.append(Lp[i][1])
+        Y.append(np.nan)
+    return X,Y,Dcoord,Dcoord2
 
 
 
