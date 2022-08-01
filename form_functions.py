@@ -45,7 +45,7 @@ def custom(Lp,f):
         if (p1[0]-p2[0]) == 0:  # special case for xp1 == xp2
             Dcoord2[p1[1]] = [p1[0],p2[0]]
         else:
-            for j in range(  ceil(min([p1[0],p2[0]])) , int(max([p1[0],p2[0]])+1) ):  # j an int between xmin and xmax
+            for j in range(  ceil(min([p1[0],p2[0]])) , floor(max([p1[0],p2[0]])+1) ):  # j an int between xmin and xmax
                     fx = (p1[1]-p2[1])/(p1[0]-p2[0]) *(j-p1[0]) +p1[1]  # the genreal equation of a line
 
                     if j in Dcoord and fx in Dcoord[j]:  # if the intersection point is already considered dont add it a seccond time
@@ -60,7 +60,7 @@ def custom(Lp,f):
         if (p1[1]-p2[1]) == 0:
             pass
         else:
-            for j in range(  ceil(min([p1[1],p2[1]])) , int(max([p1[1],p2[1]])+1) ):
+            for j in range(  ceil(min([p1[1],p2[1]])) , floor(max([p1[1],p2[1]])+1) ):
                         x = ((j - p1[1])*(p1[0]-p2[0]) + (p1[1]-p2[1])*p1[0] )/(p1[1]-p2[1])
                         if j in Dcoord2 and x in Dcoord2[j]:
                             pass
@@ -122,7 +122,7 @@ def rectangle(xc, yc, l, h, f):  # center (xc,yc) l the length on x, h the hight
 # an ellypse centered on (0,0)
 def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number of points
     a = float(a)
-    b = float(a)
+    b = float(b)
     X = []
     Y = []
     angle=0
