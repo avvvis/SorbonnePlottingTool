@@ -1,7 +1,10 @@
 To Do:
-- Add "back" buttons
 - Add possibility to change t0 and tx ( time at the end)
-- fix functions in the equation window
+- fix functions in the equation window *
+- add possibility to set initial plotting window size or make it possible to see whole animation ( the one where animation appears ) *
 - error prevention:
     - exception when windows are left blanc
     - exception when "\n" left at the end of input line
+ 
+ 
+ * - actually important stuff
