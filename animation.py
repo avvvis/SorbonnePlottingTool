@@ -1,3 +1,7 @@
+#
+# SorbonnePlottingTool
+# ---------------------
+
 # locally defined function to draw geometric 2D forms
 from form_functions import *
 # external modules and libraries

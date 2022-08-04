@@ -1,3 +1,7 @@
+#
+# SorbonnePlottingTool
+# ---------------------
+
 import tkinter as tk
 from form_functions import *
 import animation as ani
@@ -117,8 +121,8 @@ class GUI:
         button_scatterpoints = tk.Button(self.master, text="scatterpoints", width=20,
                                   command=self.scatterpoints_data_window)
         button_scatterpoints.grid(row=4, column=0, columnspan=2, sticky='W')
-        
-        
+
+
         self.clicked_grid = tk.BooleanVar()
         checkbox_grid = tk.Checkbutton(self.master, text='Grid: ', variable=self.clicked_grid, onvalue=True,
                                        offvalue=False)
@@ -271,7 +275,7 @@ class GUI:
             # running animation
             ani.animation(scatterpoints(lop), 50, self.eqt, self.var, checked, self.ahelp)
         self.ahelp += 1
-            
+
     def equation_window(self):
         self.build_new_window(400, 300, "Input Equation")
 
