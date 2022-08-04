@@ -50,10 +50,10 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
         contour_0, = plt.plot([], [],".", color='k')
         contour, = plt.plot([], [],".", color='k')
     else:
-        contour, = plt.plot([], [], color='k)
-        contour_0, = plt.plot([], [], color='k)
-    grid, = plt.plot([], [], color='b)
-    grid_0, = plt.plot([], [], color='b)
+        contour, = plt.plot([], [], color='k')
+        contour_0, = plt.plot([], [], color='k')
+    grid, = plt.plot([], [], color='b')
+    grid_0, = plt.plot([], [], color='b')
 
     # defining the animation function
     def animate(i):
@@ -77,7 +77,7 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
 
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames=(np.arange(0.0, 1000, 0.1), blit=False, interval=10, repeat=False)
+    ani = mplani.FuncAnimation(fig, animate, frames= np.arange(0.0, 1000, 0.1), blit=False, interval=10, repeat=False)
     plt.show()
     # closes those wierd windows that jump out every second time
     # if you have any idea how to fix that, please do it, I did all I could
