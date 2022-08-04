@@ -84,15 +84,15 @@ class GUI:
 
         self.pltdefaultX = tk.StringVar(self.master, value ="15")
         self.pltdefaultY = tk.StringVar(self.master, value ="15")
-        label_pltsizeX = tk.Label(self.master, text="plt size X:", width=10)
-        label_pltsizeX.grid(row=5, column=0)
+        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX.grid(row=5, column=0, sticky='W')
         self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
-        self.entry_pltsizeX.grid(row=5, column=1, sticky='w')
+        self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
 
-        label_pltsizeY = tk.Label(self.master, text="plt size Y:", width=10)
-        label_pltsizeY.grid(row=5, column=2, sticky='w')
+        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY.grid(row=5, column=1, sticky='W')
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
-        self.entry_pltsizeY.grid(row=5, column=3, sticky='w')
+        self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("ellipse"))
         button_next.grid(row=6, column=0, columnspan=2)
@@ -168,8 +168,20 @@ class GUI:
         input_label.grid(row=0, column=0, sticky='w')
 
         self.text_points = tk.Text(self.master, height=30, width=30)
-        self.text_points.grid(row=1, column=0, sticky='w', rowspan=5, columnspan=2)
+        self.text_points.grid(row=1, column=0, sticky='w', rowspan=4, columnspan=2)
         self.text_points.insert(tk.END, "points=[]")
+
+        self.pltdefaultX = tk.StringVar(self.master, value ="15")
+        self.pltdefaultY = tk.StringVar(self.master, value ="15")
+        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX.grid(row=5, column=0, sticky='W')
+        self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
+        self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
+
+        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY.grid(row=5, column=1, sticky='W')
+        self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
+        self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
         self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("custom"))
@@ -180,9 +192,15 @@ class GUI:
         self.master.focus_force()
         self.text_points.focus_set()
 
-        self.text_points.bind("<Shift-Return>", lambda event: self.button_plot_points.focus_set())
-        self.text_points.bind("<Shift-Down>", lambda event: self.button_plot_points.focus_set())
-        self.button_plot_points.bind("<Up>", lambda event: self.text_points.focus_set())
+        self.text_points.bind("<Shift-Return>", lambda event: self.entry_pltsizeX.focus_set())
+        self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_pltsizeX.bind('<Up>', lambda event: self.text_points.focus_set())
+        self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
+        self.button_plot_points.bind("<Up>", lambda event: self.entry_pltsizeY.focus_set())
         self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
 
     def scatterpoints_data_window(self):
@@ -192,8 +210,20 @@ class GUI:
         input_label.grid(row=0, column=0, sticky='w')
 
         self.text_points = tk.Text(self.master, height=30, width=30)
-        self.text_points.grid(row=1, column=0, sticky='w', rowspan=5, columnspan=2)
+        self.text_points.grid(row=1, column=0, sticky='w', rowspan=4, columnspan=2)
         self.text_points.insert(tk.END, "points=[]")
+
+        self.pltdefaultX = tk.StringVar(self.master, value ="15")
+        self.pltdefaultY = tk.StringVar(self.master, value ="15")
+        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX.grid(row=5, column=0, sticky='W')
+        self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
+        self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
+
+        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY.grid(row=5, column=1, sticky='W')
+        self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
+        self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
         self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("scatterpoints"))
@@ -204,9 +234,15 @@ class GUI:
         self.master.focus_force()
         self.text_points.focus_set()
 
-        self.text_points.bind("<Shift-Return>", lambda event: self.button_plot_points.focus_set())
-        self.text_points.bind("<Shift-Down>", lambda event: self.button_plot_points.focus_set())
-        self.button_plot_points.bind("<Up>", lambda event: self.text_points.focus_set())
+        self.text_points.bind("<Shift-Return>", lambda event: self.entry_pltsizeX.focus_set())
+        self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_pltsizeX.bind('<Up>', lambda event: self.text_points.focus_set())
+        self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
+        self.button_plot_points.bind("<Up>", lambda event: self.entry_pltsizeY.focus_set())
         self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
 
     # window to input rectangle data
@@ -239,15 +275,15 @@ class GUI:
 
         self.pltdefaultX = tk.StringVar(self.master, value ="15")
         self.pltdefaultY = tk.StringVar(self.master, value ="15")
-        label_pltsizeX = tk.Label(self.master, text="plt size X:", width=10)
-        label_pltsizeX.grid(row=5, column=0)
+        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX.grid(row=5, column=0, sticky='W')
         self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
-        self.entry_pltsizeX.grid(row=5, column=1, sticky='w')
+        self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
 
-        label_pltsizeY = tk.Label(self.master, text="plt size Y:", width=10)
-        label_pltsizeY.grid(row=5, column=2, sticky='w')
+        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY.grid(row=5, column=1, sticky='W')
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
-        self.entry_pltsizeY.grid(row=5, column=3, sticky='w')
+        self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("rectangle"))
         button_next.grid(row=6, column=0, columnspan=2)
