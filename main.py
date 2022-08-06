@@ -275,18 +275,30 @@ class GUI:
 
         self.pltdefaultX = tk.StringVar(self.master, value ="15")
         self.pltdefaultY = tk.StringVar(self.master, value ="15")
-        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX = tk.Label(self.master, text="plt size X:", width=10)
         label_pltsizeX.grid(row=5, column=0, sticky='W')
         self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
         self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
 
-        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY = tk.Label(self.master, text="plt size Y:", width=10)
         label_pltsizeY.grid(row=5, column=1, sticky='W')
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
         self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
+        self.tmin = tk.StringVar(self.master, value ="0")
+        self.tmax = tk.StringVar(self.master, value ="1000")
+        label_tmin = tk.Label(self.master, text='start time:', width=10)
+        label_tmin.grid(row=6, column=0, sticky='W')
+        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmin, width=10)
+        self.entry_tmin.grid(row=6, column=0, sticky='E')
+
+        label_tmax = tk.Label(self.master, text='end time:', width=10)
+        label_tmin.grid(row=6, column=1, sticky='W')
+        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmax, width=10)
+        self.entry_tmin.grid(row=6, column=1, sticky='E')
+
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("rectangle"))
-        button_next.grid(row=6, column=0, columnspan=2)
+        button_next.grid(row=7, column=0, columnspan=2)
 
         # adding feature of jumping between windows with arrows
         self.master.lift()
