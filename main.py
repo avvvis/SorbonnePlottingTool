@@ -94,8 +94,20 @@ class GUI:
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
         self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
+        self.tmin = tk.StringVar(self.master, value ="0")
+        self.tmax = tk.StringVar(self.master, value ="1000")
+        label_tmin = tk.Label(self.master, text='start time:', width=10)
+        label_tmin.grid(row=6, column=0, sticky='W')
+        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmin, width=10)
+        self.entry_tmin.grid(row=6, column=0, sticky='E')
+
+        label_tmax = tk.Label(self.master, text='end time:', width=10)
+        label_tmax.grid(row=6, column=1, sticky='W')
+        self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
+        self.entry_tmax.grid(row=6, column=1, sticky='E')
+
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("ellipse"))
-        button_next.grid(row=6, column=0, columnspan=2)
+        button_next.grid(row=7, column=0, columnspan=2)
 
         # adding feature of jumping between windows with arrows
         self.master.lift()
@@ -162,7 +174,7 @@ class GUI:
         button_custom.bind('<Return>', lambda event: button_custom.invoke())
 
     def custom_data_window(self):
-        self.build_new_window(250, 550, "Input points :")
+        self.build_new_window(250, 575, "Input points :")
 
         input_label = tk.Label(self.master, text="Input points")
         input_label.grid(row=0, column=0, sticky='w')
@@ -183,9 +195,21 @@ class GUI:
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
         self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
+        self.tmin = tk.StringVar(self.master, value ="0")
+        self.tmax = tk.StringVar(self.master, value ="1000")
+        label_tmin = tk.Label(self.master, text='start time:', width=10)
+        label_tmin.grid(row=6, column=0, sticky='W')
+        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmin, width=10)
+        self.entry_tmin.grid(row=6, column=0, sticky='E')
+
+        label_tmax = tk.Label(self.master, text='end time:', width=10)
+        label_tmax.grid(row=6, column=1, sticky='W')
+        self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
+        self.entry_tmax.grid(row=6, column=1, sticky='E')
+
         self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("custom"))
-        self.button_plot_points.grid(row=6, column=0, columnspan=2)
+        self.button_plot_points.grid(row=7, column=0, columnspan=2)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -204,7 +228,7 @@ class GUI:
         self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
 
     def scatterpoints_data_window(self):
-        self.build_new_window(250, 550, "Input points :")
+        self.build_new_window(250, 575, "Input points :")
 
         input_label = tk.Label(self.master, text="Input points")
         input_label.grid(row=0, column=0, sticky='w')
@@ -225,9 +249,21 @@ class GUI:
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
         self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
 
+        self.tmin = tk.StringVar(self.master, value ="0")
+        self.tmax = tk.StringVar(self.master, value ="1000")
+        label_tmin = tk.Label(self.master, text='start time:', width=10)
+        label_tmin.grid(row=6, column=0, sticky='W')
+        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmin, width=10)
+        self.entry_tmin.grid(row=6, column=0, sticky='E')
+
+        label_tmax = tk.Label(self.master, text='end time:', width=10)
+        label_tmax.grid(row=6, column=1, sticky='W')
+        self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
+        self.entry_tmax.grid(row=6, column=1, sticky='E')
+
         self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("scatterpoints"))
-        self.button_plot_points.grid(row=6, column=0, columnspan=2)
+        self.button_plot_points.grid(row=7, column=0, columnspan=2)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -293,9 +329,9 @@ class GUI:
         self.entry_tmin.grid(row=6, column=0, sticky='E')
 
         label_tmax = tk.Label(self.master, text='end time:', width=10)
-        label_tmin.grid(row=6, column=1, sticky='W')
-        self.entry_tmin = tk.Entry(self.master,textvariable=self.tmax, width=10)
-        self.entry_tmin.grid(row=6, column=1, sticky='E')
+        label_tmax.grid(row=6, column=1, sticky='W')
+        self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
+        self.entry_tmax.grid(row=6, column=1, sticky='E')
 
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("rectangle"))
         button_next.grid(row=7, column=0, columnspan=2)
@@ -325,10 +361,10 @@ class GUI:
         checked = self.clicked_grid
         if figure == "rectangle":
             ani.animation(rectangle(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
-                                    self.entry_height.get(), 100), self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()))
+                                    self.entry_height.get(), 100), self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
         if figure == "ellipse":
             ani.animation(ellipse(self.entry_x_center.get(), self.entry_y_center.get(), self.entry_length.get(),
-                                  self.entry_height.get(), 100), self.eqt, self.var, checked, self.ahelp,float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()))
+                                  self.entry_height.get(), 100), self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
 
         elif figure == "custom":
             # getting data from input (lop = list of points)
@@ -343,7 +379,7 @@ class GUI:
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
             # running animation
-            ani.animation(custom(lop, 100),self.eqt, self.var, checked, self.ahelp, 50, 50)
+            ani.animation(custom(lop, 100),self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
         elif figure == "scatterpoints":
             # getting data from input (lop = list of points)
             str_lop = self.text_points.get("1.0", tk.END)
@@ -357,7 +393,7 @@ class GUI:
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
             # running animation
-            ani.animation(scatterpoints(lop), self.eqt, self.var, checked, self.ahelp, 50, 50)
+            ani.animation(scatterpoints(lop), self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
         self.ahelp += 1
 
     def equation_window(self):
