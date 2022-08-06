@@ -84,12 +84,12 @@ class GUI:
 
         self.pltdefaultX = tk.StringVar(self.master, value ="15")
         self.pltdefaultY = tk.StringVar(self.master, value ="15")
-        label_pltsizeX = tk.Label(self.master, text="plt size X, *2:", width=10)
+        label_pltsizeX = tk.Label(self.master, text="plt size X:", width=10)
         label_pltsizeX.grid(row=5, column=0, sticky='W')
         self.entry_pltsizeX = tk.Entry(self.master, textvariable=self.pltdefaultX, width=10)
         self.entry_pltsizeX.grid(row=5, column=0, sticky='E')
 
-        label_pltsizeY = tk.Label(self.master, text="plt size Y, *2:", width=10)
+        label_pltsizeY = tk.Label(self.master, text="plt size Y:", width=10)
         label_pltsizeY.grid(row=5, column=1, sticky='W')
         self.entry_pltsizeY = tk.Entry(self.master,textvariable=self.pltdefaultY, width=10)
         self.entry_pltsizeY.grid(row=5, column=1, sticky='E')
