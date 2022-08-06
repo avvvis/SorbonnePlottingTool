@@ -123,12 +123,21 @@ class GUI:
         self.entry_height.bind('<Down>', lambda event: self.entry_pltsizeX.focus_set())
         self.entry_pltsizeX.bind('<Up>', lambda event: self.entry_height.focus_set())
         self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_pltsizeX.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.entry_tmin.focus_set())
         self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_pltsizeY.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.entry_tmax.focus_set())
         self.entry_pltsizeY.bind('<Up>', lambda event: self.entry_height.focus_set())
-        button_next.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+
+        self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
+        self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
+
+        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
         button_next.bind('<Return>', lambda event: button_next.invoke())
+
 
     def choose2d(self):
         self.build_new_window(150, 150, "choose figure")
@@ -220,12 +229,22 @@ class GUI:
         self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
         self.entry_pltsizeX.bind('<Up>', lambda event: self.text_points.focus_set())
         self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_pltsizeX.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.entry_tmin.focus_set())
         self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_pltsizeY.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.entry_tmax.focus_set())
         self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
-        self.button_plot_points.bind("<Up>", lambda event: self.entry_pltsizeY.focus_set())
-        self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
+
+        self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
+        self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
+
+        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        button_next.bind('<Return>', lambda event: button_next.invoke())
+
+
 
     def scatterpoints_data_window(self):
         self.build_new_window(250, 575, "Input points :")
@@ -274,12 +293,22 @@ class GUI:
         self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
         self.entry_pltsizeX.bind('<Up>', lambda event: self.text_points.focus_set())
         self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_pltsizeX.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.entry_tmin.focus_set())
         self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_pltsizeY.bind('<Down>', lambda event: self.button_plot_points.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.entry_tmax.focus_set())
         self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
-        self.button_plot_points.bind("<Up>", lambda event: self.entry_pltsizeY.focus_set())
-        self.button_plot_points.bind("<Return>", lambda event: self.button_plot_points.invoke())
+
+        self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
+        self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
+
+        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        button_next.bind('<Return>', lambda event: button_next.invoke())
+
+
 
     # window to input rectangle data
     def rectangle_data_window(self):
@@ -348,14 +377,24 @@ class GUI:
         self.entry_length.bind('<Down>', lambda event: self.entry_height.focus_set())
         self.entry_height.bind('<Up>', lambda event: self.entry_length.focus_set())
         self.entry_height.bind('<Down>', lambda event: self.entry_pltsizeX.focus_set())
+
         self.entry_pltsizeX.bind('<Up>', lambda event: self.entry_height.focus_set())
         self.entry_pltsizeX.bind('<Right>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_pltsizeX.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_pltsizeX.bind('<Down>', lambda event: self.entry_tmin.focus_set())
         self.entry_pltsizeY.bind('<Left>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_pltsizeY.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_pltsizeY.bind('<Down>', lambda event: self.entry_tmax.focus_set())
         self.entry_pltsizeY.bind('<Up>', lambda event: self.entry_height.focus_set())
-        button_next.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+
+        self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
+        self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
+
+        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
         button_next.bind('<Return>', lambda event: button_next.invoke())
+
 
     def plot_figure(self, figure):
         checked = self.clicked_grid
