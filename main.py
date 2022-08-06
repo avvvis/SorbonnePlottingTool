@@ -216,9 +216,9 @@ class GUI:
         self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
         self.entry_tmax.grid(row=6, column=1, sticky='E')
 
-        self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
+        self.button_next = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("custom"))
-        self.button_plot_points.grid(row=7, column=0, columnspan=2)
+        self.button_next.grid(row=7, column=0, columnspan=2)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -238,11 +238,11 @@ class GUI:
         self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
         self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
         self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: self.button_next.focus_set())
         self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
 
-        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
-        button_next.bind('<Return>', lambda event: button_next.invoke())
+        self.button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        self.button_next.bind('<Return>', lambda event: self.button_next.invoke())
 
 
 
@@ -280,9 +280,9 @@ class GUI:
         self.entry_tmax = tk.Entry(self.master,textvariable=self.tmax, width=10)
         self.entry_tmax.grid(row=6, column=1, sticky='E')
 
-        self.button_plot_points = tk.Button(self.master, text="plot!", width=10,
+        self.button_next = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("scatterpoints"))
-        self.button_plot_points.grid(row=7, column=0, columnspan=2)
+        self.button_next.grid(row=7, column=0, columnspan=2)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -299,14 +299,14 @@ class GUI:
         self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
 
         self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: self.button_next.focus_set())
         self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
         self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
-        self.entry_tmax.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmax.bind('<Down>', lambda event: self.button_next.focus_set())
         self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
 
-        button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
-        button_next.bind('<Return>', lambda event: button_next.invoke())
+        self.button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        self.button_next.bind('<Return>', lambda event: self.button_next.invoke())
 
 
 
