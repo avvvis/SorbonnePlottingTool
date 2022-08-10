@@ -31,6 +31,9 @@ class GUI:
         center_y = int(self.screen_height / 2 - sizey / 2)
         master.geometry(f"{sizex}x{sizey}+{center_x}+{center_y}")
 
+    '''
+    commented because of lack of 3D shapes
+    
     def choose_dimension(self):
         self.build_new_window(150, 100, "choose dimension")
 
@@ -55,9 +58,11 @@ class GUI:
         button2D.bind('<Return>', lambda event: button2D.invoke())
         button3D.bind('<Up>', lambda event: button2D.focus_set())
         button3D.bind('<Return>', lambda event: button3D.invoke())
+    '''
 
     def ellipse_data_window(self):
         self.build_new_window(400, 200, "Input data")
+
 
         input_label = tk.Label(self.master, text="Input data:")
         input_label.grid(row=0, column=0, sticky='W')
@@ -109,6 +114,9 @@ class GUI:
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("ellipse"))
         button_next.grid(row=7, column=0, columnspan=2)
 
+        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
+        button_back.grid(row=6, column=0, columnspan=2)
+
         # adding feature of jumping between windows with arrows
         self.master.lift()
         self.master.focus_force()
@@ -137,15 +145,17 @@ class GUI:
 
         button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
         button_next.bind('<Return>', lambda event: button_next.invoke())
+        button_next.bind("<Down>", lambda event: button_back.focus_set())
+        button_back.bind("<Up>", lambda event: button_next.focus_set())
+        button_back.bind("<Return>", lambda event: button_back.invoke())
 
 
     def choose2d(self):
-        self.build_new_window(150, 150, "choose figure")
+        self.build_new_window(150, 175, "choose figure")
 
         choose_label = tk.Label(self.master, text="Choose figure:")
         choose_label.grid(row=0, column=1, sticky='W')
 
-        # TODO: add commands
         button_rectangle = tk.Button(self.master, text="rectangle / square", width=20,
                                      command=self.rectangle_data_window)
         button_rectangle.grid(row=1, column=0, columnspan=2, sticky='W')
@@ -153,19 +163,20 @@ class GUI:
         button_ellipse = tk.Button(self.master, text="ellipse / circle", width=20, command=self.ellipse_data_window)
         button_ellipse.grid(row=2, column=0, columnspan=2, sticky='W')
 
-        button_custom = tk.Button(self.master, text="custom", width=20,
-                                  command=self.custom_data_window)
+        button_custom = tk.Button(self.master, text="custom", width=20, command=self.custom_data_window)
         button_custom.grid(row=3, column=0, columnspan=2, sticky='W')
 
         button_scatterpoints = tk.Button(self.master, text="scatterpoints", width=20,
-                                  command=self.scatterpoints_data_window)
+                                         command=self.scatterpoints_data_window)
         button_scatterpoints.grid(row=4, column=0, columnspan=2, sticky='W')
 
+        button_back = tk.Button(self.master, text="back", width=20, command=self.equation_window)
+        button_back.grid(row=5, column=0, columnspan=2, sticky='W')
 
         self.clicked_grid = tk.BooleanVar()
         checkbox_grid = tk.Checkbutton(self.master, text='Grid: ', variable=self.clicked_grid, onvalue=True,
                                        offvalue=False)
-        checkbox_grid.grid(row=5, column=0, columnspan=2, sticky='w')
+        checkbox_grid.grid(row=6, column=0, columnspan=2, sticky='w')
 
         # these lines allow to focus on button in new window
         self.master.lift()
@@ -177,13 +188,23 @@ class GUI:
         button_ellipse.bind('<Up>', lambda event: button_rectangle.focus_set())
         button_ellipse.bind('<Down>', lambda event: button_custom.focus_set())
         button_custom.bind('<Up>', lambda event: button_ellipse.focus_set())
+        button_custom.bind('<Down>', lambda event: button_scatterpoints.focus_set())
+        button_scatterpoints.bind('<Up>', lambda event: button_custom.focus_set())
+        button_scatterpoints.bind('<Down>', lambda event: button_back.focus_set())
+        button_back.bind("<Up>", lambda event: button_scatterpoints.focus_set())
+        button_back.bind("<Down>", lambda event: checkbox_grid.focus_set())
+        checkbox_grid.bind("<Up>", lambda event: button_back.focus_set())
 
         button_rectangle.bind('<Return>', lambda event: button_rectangle.invoke())
         button_ellipse.bind('<Return>', lambda event: button_ellipse.invoke())
         button_custom.bind('<Return>', lambda event: button_custom.invoke())
+        button_scatterpoints.bind('<Return>', lambda event: button_scatterpoints.invoke())
+        button_back.bind("<Return>", lambda event: button_back.invoke())
+        checkbox_grid.bind("<Return>", lambda event: checkbox_grid.invoke())
 
     def custom_data_window(self):
         self.build_new_window(250, 575, "Input points :")
+
 
         input_label = tk.Label(self.master, text="Input points")
         input_label.grid(row=0, column=0, sticky='w')
@@ -220,10 +241,14 @@ class GUI:
                                             command=lambda: self.plot_figure("custom"))
         self.button_next.grid(row=7, column=0, columnspan=2)
 
+        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
+        button_back.grid(row=7, column=0, columnspan=2)
+
         # adding focus and shortcuts
         self.master.lift()
         self.master.focus_force()
         self.text_points.focus_set()
+
 
         self.text_points.bind("<Shift-Return>", lambda event: self.entry_pltsizeX.focus_set())
         self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
@@ -248,6 +273,7 @@ class GUI:
 
     def scatterpoints_data_window(self):
         self.build_new_window(250, 575, "Input points :")
+
 
         input_label = tk.Label(self.master, text="Input points")
         input_label.grid(row=0, column=0, sticky='w')
@@ -284,10 +310,14 @@ class GUI:
                                             command=lambda: self.plot_figure("scatterpoints"))
         self.button_next.grid(row=7, column=0, columnspan=2)
 
+        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
+        button_back.grid(row=7, column=0, columnspan=2)
+
         # adding focus and shortcuts
         self.master.lift()
         self.master.focus_force()
         self.text_points.focus_set()
+
 
         self.text_points.bind("<Shift-Return>", lambda event: self.entry_pltsizeX.focus_set())
         self.text_points.bind("<Shift-Down>", lambda event: self.entry_pltsizeX.focus_set())
@@ -313,6 +343,7 @@ class GUI:
     # window to input rectangle data
     def rectangle_data_window(self):
         self.build_new_window(400, 200, "Input data")
+
 
         # adding labels and entries
         input_label = tk.Label(self.master, text="Input data:")
@@ -365,6 +396,9 @@ class GUI:
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("rectangle"))
         button_next.grid(row=7, column=0, columnspan=2)
 
+        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
+        button_back.grid(row=6, column=0, columnspan=2)
+
         # adding feature of jumping between windows with arrows
         self.master.lift()
         self.master.focus_force()
@@ -394,6 +428,9 @@ class GUI:
 
         button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
         button_next.bind('<Return>', lambda event: button_next.invoke())
+        button_next.bind("<Down>", lambda event: button_back.focus_set())
+        button_back.bind("<Up>", lambda event: button_next.focus_set())
+        button_back.bind("<Return>", lambda event: button_back.invoke())
 
 
     def plot_figure(self, figure):
@@ -409,28 +446,34 @@ class GUI:
             # getting data from input (lop = list of points)
             str_lop = self.text_points.get("1.0", tk.END)
             str_lop = str_lop.split("=")[1]
+
             # changing string into list
             # note that you have to use specific formula for list to work [x1, y1], [x2, y2], ... [xn, yn]
             str_lop = str_lop.replace(" ", '').replace("\n", '').replace("[", '').replace("]", '')
             str_lop = str_lop.split(",")
             lop = []
+
             # data after strip = x1,y1,x2,y2...xn,yn
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
+
             # running animation
             ani.animation(custom(lop, 100),self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
         elif figure == "scatterpoints":
             # getting data from input (lop = list of points)
             str_lop = self.text_points.get("1.0", tk.END)
             str_lop = str_lop.split("=")[1]
+
             # changing string into list
             # note that you have to use specific formula for list to work [x1, y1], [x2, y2], ... [xn, yn]
             str_lop = str_lop.replace(" ", '').replace("\n", '').replace("[", '').replace("]", '')
             str_lop = str_lop.split(",")
             lop = []
+
             # data after strip = x1,y1,x2,y2...xn,yn
             for i in range(0, len(str_lop), 2):
                 lop.append([float(str_lop[i]), float(str_lop[i + 1])])
+
             # running animation
             ani.animation(scatterpoints(lop), self.eqt, self.var, checked, self.ahelp, float(self.entry_pltsizeX.get()), float(self.entry_pltsizeY.get()), float(self.tmin.get()), float(self.tmax.get()))
         self.ahelp += 1
@@ -495,7 +538,7 @@ class GUI:
             e[1] = e[1].replace(" ", "")
             self.eqt[e[0]] = e[1]
 
-        self.choose_dimension()
+        self.choose2d()
 
 
 gui = GUI()
