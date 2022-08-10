@@ -1,3 +1,7 @@
+#
+# SorbonnePlottingTool
+# ---------------------
+
 # locally defined function to draw geometric 2D forms
 from form_functions import *
 # external modules and libraries
@@ -8,7 +12,8 @@ import matplotlib.animation as mplani
 
 # an animation of a specified form (see form_functions)
 # delta = plot window size (from (0-delta, 0-delta) to (0+delta, 0+delta))
-def animation(form, delta, eqt, var, clicked_grid, ahelp):
+def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
+    #deltaX, deltaY = float(deltaX), float(deltaY)
     # create variables from input
     if '__builtins__' in var:
         del var['__builtins__']
@@ -46,10 +51,10 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
         contour_0, = plt.plot([], [],".", color='k')
         contour, = plt.plot([], [],".", color='k')
     else:
-        contour, = plt.plot([], [], color='k)
-        contour_0, = plt.plot([], [], color='k)
-    grid, = plt.plot([], [], color='b)
-    grid_0, = plt.plot([], [], color='b)
+        contour, = plt.plot([], [], color='k')
+        contour_0, = plt.plot([], [], color='k')
+    grid, = plt.plot([], [], color='b')
+    grid_0, = plt.plot([], [], color='b')
 
     # defining the animation function
     def animate(i):
@@ -67,13 +72,13 @@ def animation(form, delta, eqt, var, clicked_grid, ahelp):
 
         # setting parameters of the plot
         plt.grid("--")
-        plt.xlim(-delta, delta)
-        plt.ylim(-delta, delta)
+        plt.xlim(-deltaX, deltaX)
+        plt.ylim(-deltaY, deltaY)
         plt.axis("scaled")
 
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames=(np.arange(0.0, 1000, 0.1), blit=False, interval=10, repeat=False)
+    ani = mplani.FuncAnimation(fig, animate, frames= np.arange(tmin, tmax, 0.1), blit=False, interval=10, repeat=False)
     plt.show()
     # closes those wierd windows that jump out every second time
     # if you have any idea how to fix that, please do it, I did all I could

@@ -1,3 +1,7 @@
+#
+# SorbonnePlottingTool
+# ---------------------
+
 # external libraries
 from math import *
 import matplotlib.pyplot as plt
@@ -132,10 +136,10 @@ def ellipse_0(a,b,Np): # a the half axe on x, b the half axe on y, Np the number
         angle += (2*pi)/Np
     return X,Y
 
-def ellypse(xc, yc, a,b, Np):  # center (xc,yc)
+def ellipse(xc, yc, a,b, Np):  # center (xc,yc)
     xc = float(xc)
     yc = float(yc)
-    X, Y = ellypse_0(a,b,Np)
+    X, Y = ellipse_0(a,b,Np)
     Lp = []
     for i in range(Np+1):
         X[i] += xc
@@ -158,7 +162,6 @@ def scatterpoints(Lp):
         Y.append(Lp[i][1])
         Y.append(np.nan)
     return X,Y,Dcoord,Dcoord2
-
 
 
 
