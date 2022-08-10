@@ -33,7 +33,7 @@ class GUI:
 
     '''
     commented because of lack of 3D shapes
-    
+
     def choose_dimension(self):
         self.build_new_window(150, 100, "choose dimension")
 
@@ -112,10 +112,10 @@ class GUI:
         self.entry_tmax.grid(row=6, column=1, sticky='E')
 
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("ellipse"))
-        button_next.grid(row=7, column=0, columnspan=2)
+        button_next.grid(row=7, column=0, columnspan=1)
 
         button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
-        button_back.grid(row=6, column=0, columnspan=2)
+        button_back.grid(row=8, column=0, columnspan=1)
 
         # adding feature of jumping between windows with arrows
         self.master.lift()
@@ -239,10 +239,10 @@ class GUI:
 
         self.button_next = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("custom"))
-        self.button_next.grid(row=7, column=0, columnspan=2)
+        self.button_next.grid(row=7, column=1, columnspan=1)
 
-        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
-        button_back.grid(row=7, column=0, columnspan=2)
+        button_back = tk.Button(self.master, text="back", width=10, command=lambda: self.choose2d())
+        button_back.grid(row=7, column=0, columnspan=1)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -260,13 +260,18 @@ class GUI:
         self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
 
         self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_tmin.bind('<Down>', lambda event: button_next.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_back.focus_set())
         self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
         self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
         self.entry_tmax.bind('<Down>', lambda event: self.button_next.focus_set())
         self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
 
-        self.button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        button_back.bind('<Right>', lambda event: self.button_next.focus_set())
+        button_back.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        button_back.bind('<Return>', lambda event: button_back.invoke())
+
+        self.button_next.bind('<Up>', lambda event: self.entry_tmax.focus_set())
+        self.button_next.bind('<Left>', lambda event: button_back.focus_set())
         self.button_next.bind('<Return>', lambda event: self.button_next.invoke())
 
 
@@ -308,10 +313,10 @@ class GUI:
 
         self.button_next = tk.Button(self.master, text="plot!", width=10,
                                             command=lambda: self.plot_figure("scatterpoints"))
-        self.button_next.grid(row=7, column=0, columnspan=2)
+        self.button_next.grid(row=7, column=1, columnspan=1)
 
-        button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
-        button_back.grid(row=7, column=0, columnspan=2)
+        button_back = tk.Button(self.master, text="back", width=10, command=lambda: self.choose2d())
+        button_back.grid(row=7, column=0, columnspan=1)
 
         # adding focus and shortcuts
         self.master.lift()
@@ -329,15 +334,19 @@ class GUI:
         self.entry_pltsizeY.bind('<Up>', lambda event: self.text_points.focus_set())
 
         self.entry_tmin.bind('<Up>', lambda event: self.entry_pltsizeX.focus_set())
-        self.entry_tmin.bind('<Down>', lambda event: self.button_next.focus_set())
+        self.entry_tmin.bind('<Down>', lambda event: button_back.focus_set())
         self.entry_tmin.bind('<Right>', lambda event: self.entry_tmax.focus_set())
         self.entry_tmax.bind('<Up>', lambda event: self.entry_pltsizeY.focus_set())
         self.entry_tmax.bind('<Down>', lambda event: self.button_next.focus_set())
         self.entry_tmax.bind('<Left>', lambda event: self.entry_tmin.focus_set())
 
-        self.button_next.bind('<Up>', lambda event: self.entry_tmin.focus_set())
-        self.button_next.bind('<Return>', lambda event: self.button_next.invoke())
+        button_back.bind('<Right>', lambda event: self.button_next.focus_set())
+        button_back.bind('<Up>', lambda event: self.entry_tmin.focus_set())
+        button_back.bind('<Return>', lambda event: button_back.invoke())
 
+        self.button_next.bind('<Up>', lambda event: self.entry_tmax.focus_set())
+        self.button_next.bind('<Left>', lambda event: button_back.focus_set())
+        self.button_next.bind('<Return>', lambda event: self.button_next.invoke())
 
 
     # window to input rectangle data
@@ -394,10 +403,10 @@ class GUI:
         self.entry_tmax.grid(row=6, column=1, sticky='E')
 
         button_next = tk.Button(self.master, text="next", width=20, command=lambda: self.plot_figure("rectangle"))
-        button_next.grid(row=7, column=0, columnspan=2)
+        button_next.grid(row=7, column=0, columnspan=1)
 
         button_back = tk.Button(self.master, text="back", width=20, command=lambda: self.choose2d())
-        button_back.grid(row=6, column=0, columnspan=2)
+        button_back.grid(row=8, column=0, columnspan=1)
 
         # adding feature of jumping between windows with arrows
         self.master.lift()
