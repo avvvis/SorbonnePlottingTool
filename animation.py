@@ -5,6 +5,8 @@
 # locally defined function to draw geometric 2D forms
 from form_functions import *
 # external modules and libraries
+from sympy import *
+#from math import *
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as mplani
@@ -15,6 +17,7 @@ import matplotlib.animation as mplani
 def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
     #deltaX, deltaY = float(deltaX), float(deltaY)
     # create variables from input
+    x, y, z, t = symbols('x y z t')
     if '__builtins__' in var:
         del var['__builtins__']
 
@@ -27,7 +30,7 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
         v['y'] = y
         v['z'] = z
         v['t'] = t
-        return eval(eqt['x'], v)
+        return eval(eqt['x'])
 
     def transform_x2(x, y, z, t):
         v = var.copy()
@@ -35,7 +38,7 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
         v['y'] = y
         v['z'] = z
         v['t'] = t
-        return eval(eqt['y'], v)
+        return eval(eqt['y'])
 
     X1, X2, Dcoord1, Dcoord2 = np.array(form[0]), np.array(form[1]), form[2], form[3]
 
