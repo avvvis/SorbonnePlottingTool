@@ -5,9 +5,10 @@
 # locally defined function to draw geometric 2D forms
 from form_functions import *
 # external modules and libraries
-from sympy import *
+#from sympy import *
 #from math import *
 import numpy as np
+from numpy import *
 import matplotlib.pyplot as plt
 import matplotlib.animation as mplani
 
@@ -17,7 +18,7 @@ import matplotlib.animation as mplani
 def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
     #deltaX, deltaY = float(deltaX), float(deltaY)
     # create variables from input
-    x, y, z, t = symbols('x y z t')
+    #x, y, z, t = symbols('x y z t')
     if '__builtins__' in var:
         del var['__builtins__']
 
@@ -30,8 +31,8 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
         v['y'] = y
         v['z'] = z
         v['t'] = t
-        return eval(eqt['x'])
 
+        return eval(eqt['x'])
     def transform_x2(x, y, z, t):
         v = var.copy()
         v['x'] = x
@@ -40,23 +41,23 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
         v['t'] = t
         return eval(eqt['y'])
 
-    X1, X2, Dcoord1, Dcoord2 = np.array(form[0]), np.array(form[1]), form[2], form[3]
+    X1, X2, Dcoord1, Dcoord2 = array(form[0]), array(form[1]), form[2], form[3]
 
     # enables plotting or not plotting the Grid
     if clicked_grid.get() == True:
         Xg, Yg = plot_mgrid(Dcoord1, Dcoord2, 100)
     elif clicked_grid.get() == False:
-        Xg, Yg = np.nan, np.nan
+        Xg, Yg = nan, nan
 
     # initialising figure and the things we want to plot
     fig = plt.figure()
     if Dcoord1 == -1 and Dcoord2 == -1:
-        contour_0, = plt.plot([], [],".", color='k')
+        contour_0, = plt.plot([], [],".", color='b')
         contour, = plt.plot([], [],".", color='k')
     else:
         contour, = plt.plot([], [], color='k')
-        contour_0, = plt.plot([], [], color='k')
-    grid, = plt.plot([], [], color='b')
+        contour_0, = plt.plot([], [], color='b')
+    grid, = plt.plot([], [], color='k')
     grid_0, = plt.plot([], [], color='b')
 
     # defining the animation function
@@ -81,7 +82,7 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
 
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames= np.arange(tmin, tmax, 0.1), blit=False, interval=10, repeat=False)
+    ani = mplani.FuncAnimation(fig, animate, frames= arange(tmin, tmax, 0.1), blit=False, interval=10, repeat=False)
     plt.show()
     # closes those wierd windows that jump out every second time
     # if you have any idea how to fix that, please do it, I did all I could

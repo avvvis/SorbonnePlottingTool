@@ -7,6 +7,7 @@ from form_functions import *
 import animation as ani
 
 
+
 class GUI:
     def __init__(self):
         self.master = tk.Tk()
