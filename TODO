@@ -1,6 +1,6 @@
 To Do:
-- Add possibility to change t0 and tx ( time at the end)
-- fix functions in the equation window *
+- Add possibility to change t0 and tx ( time at the end) DONE: Martin
+- fix functions in the equation window *                 DONE: Martin
 - add possibility to set initial plotting window size or make it possible to see whole animation ( the one where animation appears ) * --> Martin: input plotting window size in progress
 - error prevention:
     - exception when windows are left blanc
