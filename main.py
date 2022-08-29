@@ -6,8 +6,6 @@ import tkinter as tk
 from form_functions import *
 import animation as ani
 
-
-
 class GUI:
     def __init__(self):
         self.master = tk.Tk()
@@ -501,11 +499,14 @@ class GUI:
         label_eq.grid(row=1, column=0, columnspan=1, sticky='E')
         self.entry_equation = tk.Text(self.master, width=30, height=5)
         self.entry_equation.grid(row=1, column=1, sticky='e')
+        self.entry_equation.insert('1.0', 'x = x  + sin(t)\ny = y  + cos(t)')
+
 
         label_variables = tk.Label(self.master, text="Variables: ", width=15)
         label_variables.grid(row=2, column=0)
         self.entry_variables = tk.Text(self.master, width=30, height=5)
         self.entry_variables.grid(row=2, column=1)
+        self.entry_variables.insert('1.0', 'alpha=0')
 
         self.button_plot = tk.Button(self.master, text='NEXT', command=lambda: self.get_variables())
         self.button_plot.grid(row=3, column=1, columnspan=2)
