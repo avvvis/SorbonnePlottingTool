@@ -27,18 +27,16 @@ def animation(form, eqt, var, clicked_grid, ahelp, deltaX, deltaY,tmin,tmax):
 
     def transform_x1(x, y, z, t):
         v = var.copy()
-        v['x'] = x
-        v['y'] = y
-        v['z'] = z
-        v['t'] = t
+        for key in v:
+            locals()[key] = v[key]
+
 
         return eval(eqt['x'])
     def transform_x2(x, y, z, t):
         v = var.copy()
-        v['x'] = x
-        v['y'] = y
-        v['z'] = z
-        v['t'] = t
+        for key in v:
+            locals()[key] = v[key]
+
         return eval(eqt['y'])
 
     X1, X2, Dcoord1, Dcoord2 = array(form[0]), array(form[1]), form[2], form[3]
